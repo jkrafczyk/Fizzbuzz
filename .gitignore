@@ -1,0 +1,12 @@
+.vscode
+*.dSYM
+*.o
+*.trace
+.DS_Store
+
+fizz2
+fizzbuzz
+hyperfizz
+naive_fizzbuzz
+
+benchmark-*.txt
