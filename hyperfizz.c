@@ -10,7 +10,7 @@ char *fizzbuzz(uint32_t max_n, char *buffer) {
     char *output_so_far = full_output;
     static char *number = NULL;
     if (number == NULL) {
-        number = malloc(11);
+        number = malloc(16);
     }
     static uint32x4_t DIVISORS_SMALL = {10, 100, 1000, 10000};
     static uint32x4_t DIVISORS_LARGE = {100000, 1000000, 10000000, 100000000};
@@ -57,9 +57,9 @@ char *fizzbuzz(uint32_t max_n, char *buffer) {
     
         char *possible_outputs[] = {
             number,
-            "fizz       ",
-            "buzz       ",
-            "fizzbuzz   "
+            "fizz            ",
+            "buzz            ",
+            "fizzbuzz        "
         };
         int lengths[] = {
             n_digits, 
@@ -72,7 +72,6 @@ char *fizzbuzz(uint32_t max_n, char *buffer) {
         int output_index = (is_fizzy & 0x1) + ((is_buzzy & 0x1) << 1);
 
         *(__uint128_t*)output_so_far = *(__uint128_t*)(possible_outputs[output_index]);
-        output_so_far[10] = possible_outputs[output_index][10];
         output_so_far += lengths[output_index];
         output_so_far[0] = '\n';
         output_so_far++;
