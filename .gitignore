@@ -7,6 +7,7 @@
 fizz2
 fizzbuzz
 hyperfizz
+hyperfizz_novector
 naive_fizzbuzz
 
 benchmark-*.txt

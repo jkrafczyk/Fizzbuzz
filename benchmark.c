@@ -3,14 +3,18 @@
 #include <stdlib.h>
 #include <time.h>
 
-void benchmark_fizzbuzz(char *function_name, fizzbuzz_function_t fizzer) {
+#define QUOTE(x) #x
+#define STR(x) QUOTE(x)
+
+void benchmark_fizzbuzz(fizzbuzz_function_t fizzer) {
+    char *function_name = STR(VARIANT_NAME);
     uint32_t n = 100000000;
     // Output is _at most_ 10 chars (large 32-bit int) plus newline for every iteration. max_n*11 bytes plus terminating 0 should be enough for everyone.
     char *out = malloc(11*n+1);  
 
     // One round to demonstrate this mostly works:
-    fizzer(132, out);
-    printf("%s\n", out);
+    // fizzer(132, out);
+    // printf("%s\n", out);
 
     // a few runs for warm-up:
     fizzer(n, out);

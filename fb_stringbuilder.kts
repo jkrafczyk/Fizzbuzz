@@ -39,8 +39,6 @@ fun benchmark(n: Int, repetitions: Int) {
     System.err.println("  ${millis/totalRepetitions} ms per repetition")
 }
 
-print(fizzbuzz(32))
-
 // For comparison: hyperfizz takes ~570ms per iteration at n=100_000_000
 // naive_fizzbuzz takes just over 2 seconds at the same setting.
 // This took 1300ms. Needed to be run with kotlin -J-Xmx10G fb_stringbuilder.kts

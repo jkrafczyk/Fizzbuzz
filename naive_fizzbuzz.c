@@ -28,6 +28,6 @@ char *fizzbuzz(unsigned max_n, char *buffer) {
 }
 
 int main(int argc, char **argv) {
-    benchmark_fizzbuzz("naive_fizzbuzz", fizzbuzz);
+    benchmark_fizzbuzz(fizzbuzz);
     return 0;
 }

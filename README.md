@@ -20,15 +20,52 @@ This repository contains several FizzBuzz implementations in C and Kotlin. The i
   The end effect is that there are no conditional branches within the loop body, avoiding the cost of branch mispredictions. The only repeatedly occurring conditional branch while generating the output is the loop condition itself, which should be correctly handled by the branch predictor the majority of the time.
 
 ## Benchmark results
-Tested on a MacBook Air M2:
+Tested on a MacBook Pro with M3 Pro CPU:
 ```
 Running benchmark for hyperfizz.
-  Took 14516 ms for 25 repetitions with n=100000000.
-  580 ms per repetition
+  Took 12313 ms for 25 repetitions with n=100000000.
+  492 ms per repetition
+Running benchmark for hyperfizz_novector.
+  Took 12896 ms for 25 repetitions with n=100000000.
+  515 ms per repetition
 Running benchmark for naive_fizzbuzz.
-  Took 50946 ms for 25 repetitions with n=100000000.
-  2037 ms per repetition
+  Took 44240 ms for 25 repetitions with n=100000000.
+  1769 ms per repetition
 Running benchmark for fb_stringbuilder.
-  Took 42831 ms for 25 repetitions with n=100000000
-  1713 ms per repetition
+  Took 24282 ms for 25 repetitions with n=100000000
+  971 ms per repetition
 ```
+
+Using NEON to calculate the length of the printed number reliably improves runtime, but only very slightly. 
+| Variant | ms | in relation to naive_fizzbuzz | in relation to vectorized hyperfizz |
+|--|--|--|--|
+| naive_fizzbuzz | 1769 | 100% | 360% |
+| fb_stringbuilder | 971 | 55% | 197% |
+| hyperfizz_novector | 515 | 29% | 105% | 
+| **hyperfizz** | **492** | **28%** | **100%** |
+
+
+Tested on a AMD Ryzen 9 3900X:
+```
+Running benchmark for hyperfizz.
+  Took 24792 ms for 25 repetitions with n=100000000.
+  991 ms per repetition
+Running benchmark for hyperfizz_novector.
+  Took 24259 ms for 25 repetitions with n=100000000.
+  970 ms per repetition
+Running benchmark for naive_fizzbuzz.
+  Took 70187 ms for 25 repetitions with n=100000000.
+  2807 ms per repetition
+Running benchmark for fb_stringbuilder.
+  Took 37987 ms for 25 repetitions with n=100000000
+  1519 ms per repetition
+```
+
+Using AVX2 to calculate the length of the printed number reliably worsens runtime. (Although that may well be due to my incompetence!)
+
+| Variant | ms | in relation to naive_fizzbuzz | in relation to vectorized hyperfizz |
+|--|--|--|--|
+| naive_fizzbuzz | 2807 | 100% | 283% |
+| fb_stringbuilder | 1519 | 54% | 153% |
+| **hyperfizz_novector** | **970** | **34.5%** | **98%** |
+| hyperfizz | 991 | 35.3% | 100% |
