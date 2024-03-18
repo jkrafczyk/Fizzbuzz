@@ -20,7 +20,7 @@ This repository contains several FizzBuzz implementations in C and Kotlin. The i
   The end effect is that there are no conditional branches within the loop body, avoiding the cost of branch mispredictions. The only repeatedly occurring conditional branch while generating the output is the loop condition itself, which should be correctly handled by the branch predictor the majority of the time.
 
 ## Benchmark results
-Tested on a MacBook Pro with M3 Pro CPU:
+### Tested on a MacBook Pro with M3 Pro CPU:
 ```
 Running benchmark for hyperfizz.
   Took 12313 ms for 25 repetitions with n=100000000.
@@ -45,7 +45,7 @@ Using NEON to calculate the length of the printed number reliably improves runti
 | **hyperfizz** | **492** | **28%** | **100%** |
 
 
-Tested on a AMD Ryzen 9 3900X:
+### Tested on a AMD Ryzen 9 3900X:
 ```
 Running benchmark for hyperfizz.
   Took 24792 ms for 25 repetitions with n=100000000.
